@@ -1,4 +1,5 @@
 theme = 'catppuccin'
+editor = ""
 auto_check_update = false
 cd_on_quit = false
 default_open_file_preview = true
@@ -25,4 +26,4 @@ border_middle_right = '┤'
   
 # PLUGINS
 metadata = true
-
+enable_md5_checksum = false

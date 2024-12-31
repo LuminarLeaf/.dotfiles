@@ -5,6 +5,10 @@ if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]] then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+# bash like word select
+autoload -U select-word-style
+select-word-style bash
+
 # Set zinit directory
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -44,14 +48,22 @@ if [ -z "$TERM_PROGRAM" ] || [ "$TERM_PROGRAM" != "WarpTerminal" ]; then
 fi
 
 # Keybindings
-bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
+bindkey -v
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+bindkey '^?' backward-delete-char
+bindkey '^f' forward-char
+bindkey '^[b' vi-backward-word
+bindkey '^[f' vi-forward-word
+bindkey '^[n' down-line-or-history
+bindkey '^[p' up-line-or-history
+bindkey '^[^?' backward-kill-word
 
 # History
 HISTFILE=~/.zsh_history
-HISTSIZE=5000
-SAVEHIST=50000
+HISTSIZE=50000
+SAVEHIST=10000
+HISTORY_IGNORE='(rm *|pkill *)'
 HISTDUP=erase
 setopt appendhistory
 setopt sharehistory
@@ -65,8 +77,9 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color always $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color always $realpath'
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
 # Functions
 if [ -f ~/.sh/functions.sh ]; then source ~/.sh/functions.sh; fi

@@ -10,7 +10,7 @@ alias c='clear'
 alias less='less -RF'
 alias du='du -had1'
 alias df='df -h'
-alias free='free -m'
+alias free='free -h'
 
 alias sn='shutdown now'
 alias srn='shutdown -r now'
@@ -62,7 +62,7 @@ fi
 
 # fd
 if check fd; then
-  alias fd='fd --hidden -E .git -E node_modules -E .cache'
+  alias fd='fd --hidden'
 fi
 
 # tre

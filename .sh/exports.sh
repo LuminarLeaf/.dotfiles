@@ -12,7 +12,11 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # EDITOR
 if check nvim; then
   export EDITOR="nvim"
-  export VISUAL="nvim"
+  if check neovide; then
+    export VISUAL="neovide"
+  else
+    export VISUAL="nvim"
+  fi
 else
   export EDITOR="vi"
   export VISUAL="vi"
@@ -27,8 +31,7 @@ fi
 
 # bat
 if [ -n "$BAT_BIN" ]; then
-  export MANPAGER="sh -c 'col -bx | $BAT_BIN -l man -p'"
-  export MANROFFOPT="-c"
+  export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | $BAT_BIN -p -lman' "
   export PAGER="$BAT_BIN"
   export BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/config" # TODO: check if same on debian/ubuntu
 fi

@@ -43,3 +43,13 @@ mkcd() {
   fi
   mkdir -p $1 && cd $1
 }
+
+e() {
+  if [[ -n "$VISUAL" ]]; then
+    "$VISUAL" "$@"
+  elif [[ -n "$EDITOR" ]]; then
+    "$EDITOR" "$@"
+  else
+    echo "No editor set"
+  fi
+}

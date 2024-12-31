@@ -1,7 +1,6 @@
 #:schema https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
 
 version = 2
-patch_pwsh_bleed = true
 disable_notice = true
 final_space = true
 console_title_template = '{{ .Shell }} in {{ .Folder }}'
@@ -23,19 +22,19 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     template = ' '
 
   [[blocks.segments]]
+    type='os'
+    style='plain'
+    foreground = 'p:os'
+    template='{{ .Var.sepl }}{{ .UserName }}{{ .Icon }} {{ if .WSL }}WSL @{{ end }} {{ .HostName }}{{ .Var.sepr }}'
+
+  [[blocks.segments]]
     type = 'path'
     style = 'plain'
     foreground = 'p:text'
-    template = '{{ .Var.sepl }}{{ .Path }}{{ .Var.sepr }}'
+    template = '{{ .Var.sepld }}{{ path .Path .Location }}{{ .Var.sepr }}'
 
     [blocks.segments.properties]
       style = 'full'
-
-  [[blocks.segments]]
-    type='os'
-    style='plain'
-    foreground='p:wsl'
-    template='{{ if .WSL }}{{ .Var.sepld }}{{ .Icon }} {{ .UserName }}{{ .Var.sepr }}{{ end }}'
 
   [[blocks.segments]]
     type = 'python'
@@ -45,8 +44,6 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 
     [blocks.segments.properties]
       display_mode = 'context'
-      fetch_virtual_env = true
-      display_default = false
 
   [[blocks.segments]]
     type = 'node'
@@ -69,23 +66,17 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 
 [[blocks]]
   type = 'prompt'
-  alignment = 'right'
-  overflow = 'hide'
+  alignment = 'left'
+  newline = true
 
   [[blocks.segments]]
     type = 'executiontime'
     style = 'plain'
     foreground = 'p:text'
-    template = '{{ .Var.sepl }}{{ .FormattedMs }}{{ .Var.sepr }}'
+    template = ' {{ .FormattedMs }} '
 
     [blocks.segments.properties]
-      threshold = 1000
-
-
-[[blocks]]
-  type = 'prompt'
-  alignment = 'left'
-  newline = true
+      threshold = 500
 
   [[blocks.segments]]
     type = 'text'
@@ -101,7 +92,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     '{{ if gt .Code 0 }}p:error{{ end }}',
     'p:text',
   ]
-  template = '❱ '
+  template = '{{ .PWD }} ❱ '
 
 [secondary_prompt]
   foreground = 'p:text'
@@ -115,4 +106,4 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   py        = 'lightYellow'
   node      = 'lightGreen'
   git       = 'lightWhite'
-  wsl       = 'lightMagenta'
+  os       = 'lightMagenta'
