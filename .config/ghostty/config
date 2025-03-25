@@ -1,0 +1,10 @@
+background-blur-radius = 1
+background-opacity = 0.9
+confirm-close-surface = false
+font-family = JetBrainsMono Nerd Font
+font-size = 12
+gtk-tabs-location = bottom
+gtk-titlebar = false
+gtk-single-instance = true
+theme = catppuccin-mocha
+window-padding-color = extend
