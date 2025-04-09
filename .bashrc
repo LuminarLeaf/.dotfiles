@@ -17,17 +17,8 @@ shopt -s histappend checkwinsize expand_aliases
 set +o noclobber
 
 # Brew
-if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]] then
+if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
-
-# Load oh-my-posh
-if check oh-my-posh; then
-  if [ -z "$TERM_PROGRAM" ] || [ "$TERM_PROGRAM" != "WarpTerminal" ]; then
-    eval "$(oh-my-posh init bash --config "$XDG_CONFIG_HOME/omp/omp_config.toml")"
-  fi
-else
-  PS1='[\u@\h \W]\$ '
 fi
 
 # Bash completion
@@ -44,3 +35,11 @@ if check fzf; then eval "$(fzf --bash)"; fi
 
 # zoxide
 if check zoxide; then eval "$(zoxide init --cmd cd bash)"; fi
+
+# Load oh-my-posh
+if check oh-my-posh; then
+  eval "$(oh-my-posh init bash --config "$XDG_CONFIG_HOME/omp/omp_config.toml")"
+else
+  PS1='[\u@\h \W]\$ '
+fi
+

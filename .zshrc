@@ -41,11 +41,6 @@ fi
 # Source your static plugins file.
 source ${zsh_plugins}.zsh
 
-# Load oh-my-posh
-if [ -z "$TERM_PROGRAM" ] || [ "$TERM_PROGRAM" != "WarpTerminal" ]; then
-    eval "$(oh-my-posh init zsh --config ~/.config/omp/omp_config.toml)"
-fi
-
 # Keybindings
 bindkey -v
 bindkey '^a' beginning-of-line
@@ -89,3 +84,4 @@ if [ -f ~/.sh/aliases.sh ]; then source ~/.sh/aliases.sh; fi
 if check fzf; then eval "$(fzf --zsh)"; fi
 if check zoxide; then eval "$(zoxide init --cmd cd zsh)"; fi
 
+if check oh-my-posh; then eval "$(oh-my-posh init zsh --config ~/.config/omp/omp_config.toml)"; fi
