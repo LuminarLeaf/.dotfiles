@@ -65,16 +65,15 @@ fi
 
 # Spicetify
 if [ -d "$HOME/.spicetify" ]; then
-  export PATH=$PATH:$HOME/.spicetify
+  export PATH="$PATH:$HOME/.spicetify"
 fi
 
 # delta
 if check delta; then
-  export DELTA_PAGER="less --RAW-CONTROL-CHARS --quit-if-one-screen"
+  export DELTA_PAGER="less -RF"
 fi
 
 # Cargo
 if [ -d "$HOME/.cargo/bin" ]; then
-  export PATH=$PATH:$HOME/.cargo/bin
+  export PATH="$PATH:$HOME/.cargo/bin"
 fi
-

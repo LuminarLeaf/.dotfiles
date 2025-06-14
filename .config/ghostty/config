@@ -1,10 +1,11 @@
 background-blur-radius = 1
 background-opacity = 0.9
 confirm-close-surface = false
-font-family = JetBrainsMono Nerd Font
+font-family = MonaspiceNe Nerd Font
 font-size = 12
-gtk-tabs-location = bottom
+# gtk-tabs-location = bottom
 gtk-titlebar = false
-gtk-single-instance = true
+# gtk-single-instance = true
 theme = catppuccin-mocha
+unfocused-split-opacity = 1
 window-padding-color = extend

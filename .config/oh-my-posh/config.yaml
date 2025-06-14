@@ -1,0 +1,108 @@
+#:schema https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+version: 2
+disable_notice: true
+final_space: true
+
+var:
+  sepl: <p:separator>❬</>
+  sepld: <p:separator>-❬</>
+  sepr: <p:separator>❭</>
+
+blocks:
+  - alignment: left
+    newline: true
+    segments:
+      - foreground: p:root
+        style: plain
+        template: " "
+        type: root
+
+      - foreground: p:os
+        style: plain
+        template: "{{ .Var.sepl }}{{ .UserName }}{{ .Icon }} {{ .HostName }}{{ .Var.sepr }}"
+        type: os
+
+      - foreground: p:nix
+        style: plain
+        template: '{{ if ne .Type "unknown" }}{{ .Var.sepld }}nix-shell{{ .Var.sepr }}{{ end }}'
+        type: nix-shell
+
+      - foreground: p:text
+        properties:
+          style: full
+        style: plain
+        template: "{{ .Var.sepld }}{{ path .Path .Location }}{{ .Var.sepr }}"
+        type: path
+
+      - foreground: p:py
+        properties:
+          display_mode: context
+        style: plain
+        template: "{{ .Var.sepld }} {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}{{ .Var.sepr }}"
+        type: python
+
+      - foreground: p:node
+        style: plain
+        template: "{{ .Var.sepld }}󰎙 {{if .Error}}{{ .Error }} {{ else }}{{ .Full }}{{ end }}{{ .Var.sepr }}"
+        type: node
+
+      - foreground: p:go
+        properties:
+          parse_mod_file: true
+        style: plain
+        template: "{{ .Var.sepld }}󰟓 {{if .Error}}{{ .Error }} {{ else }}{{ .Full }}{{ end }}{{ .Var.sepr }}"
+        type: go
+
+      - foreground: p:rust
+        style: plain
+        template: "{{ .Var.sepld }} {{if .Error}}{{ .Error }} {{ else }}{{ .Full }}{{ end }}{{ .Var.sepr }}"
+        type: rust
+
+      - foreground: p:git
+        properties:
+          fetch_status: true
+        style: plain
+        template: "{{ .Var.sepld }}{{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }}{{ .Var.sepr }}"
+        type: git
+    type: prompt
+
+  - alignment: left
+    newline: true
+    segments:
+      - foreground: p:text
+        properties:
+          threshold: 500
+        style: plain
+        template: " {{ .FormattedMs }} "
+        type: executiontime
+      - foreground_templates:
+          - "{{ if gt .Code 0 }}p:error{{ end }}"
+          - p:text
+        style: plain
+        template: ❱
+        type: text
+    type: prompt
+
+secondary_prompt:
+  foreground: p:text
+  template: "❱❱ "
+
+transient_prompt:
+  foreground: p:text
+  foreground_templates:
+    - "{{ if gt .Code 0 }}p:error{{ end }}"
+  template: "{{ .PWD }} ❱ "
+
+palette:
+  error: lightRed
+  git: lightWhite
+  go: lightBlue
+  nix: cyan
+  node: lightGreen
+  os: lightMagenta
+  py: lightYellow
+  root: red
+  rust: lightRed
+  separator: green
+  text: lightBlue

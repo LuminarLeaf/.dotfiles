@@ -67,6 +67,7 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color always $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color always $realpath'
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
@@ -84,4 +85,5 @@ if [ -f ~/.sh/aliases.sh ]; then source ~/.sh/aliases.sh; fi
 if check fzf; then eval "$(fzf --zsh)"; fi
 if check zoxide; then eval "$(zoxide init --cmd cd zsh)"; fi
 
+# Prompt Engine
 if check oh-my-posh; then eval "$(oh-my-posh init zsh --config ~/.config/omp/omp_config.toml)"; fi
